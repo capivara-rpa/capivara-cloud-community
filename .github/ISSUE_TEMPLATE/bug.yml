@@ -1,0 +1,68 @@
+name: Bug
+description: Reporte um comportamento inesperado no produto.
+title: "[Bug] "
+labels: ["bug", "precisa-de-mais-info"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Não inclua segredos. Para vulnerabilidades, use o canal do SECURITY.md.
+  - type: textarea
+    id: descricao
+    attributes:
+      label: O que aconteceu?
+      placeholder: Ao clicar em Rodar, o fluxo...
+    validations:
+      required: true
+  - type: textarea
+    id: esperado
+    attributes:
+      label: O que você esperava?
+    validations:
+      required: true
+  - type: textarea
+    id: reproducao
+    attributes:
+      label: Passos para reproduzir
+      placeholder: |
+        1. Abra ...
+        2. Crie ...
+        3. Clique ...
+    validations:
+      required: true
+  - type: input
+    id: versao
+    attributes:
+      label: Versão/commit
+      placeholder: v0.1.0 ou hash do commit
+    validations:
+      required: true
+  - type: dropdown
+    id: ambiente
+    attributes:
+      label: Ambiente
+      options:
+        - macOS
+        - Windows
+        - Linux
+        - Docker
+        - Outro
+    validations:
+      required: true
+  - type: textarea
+    id: logs
+    attributes:
+      label: Logs/erros
+      description: Remova tokens, senhas e dados pessoais.
+      render: shell
+    validations:
+      required: false
+  - type: checkboxes
+    id: confirmacoes
+    attributes:
+      label: Confirmações
+      options:
+        - label: Não incluí segredos ou dados de clientes.
+          required: true
+        - label: Procurei issues existentes.
+          required: true

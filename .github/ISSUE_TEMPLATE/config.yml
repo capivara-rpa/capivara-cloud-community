@@ -1,0 +1,11 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Discussões da comunidade
+    url: https://github.com/capivara-rpa/capivara-cloud-community/discussions
+    about: Tire dúvidas e converse sobre ideias antes de abrir uma issue.
+  - name: Produto Capivara Cloud
+    url: https://github.com/capivara-rpa/capivara-cloud
+    about: Código, releases e documentação oficial.
+  - name: Segurança
+    url: https://github.com/capivara-rpa/capivara-cloud-community/blob/main/SECURITY.md
+    about: Como reportar vulnerabilidades de forma privada.

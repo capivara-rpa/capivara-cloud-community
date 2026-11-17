@@ -1,0 +1,65 @@
+name: Conector
+description: Proponha uma nova integração para o Capivara Cloud.
+title: "[Conector] "
+labels: ["conector", "sugestao", "em-avaliacao"]
+body:
+  - type: input
+    id: servico
+    attributes:
+      label: Serviço
+      placeholder: "Ex.: Google Drive, Postgres, HubSpot"
+    validations:
+      required: true
+  - type: input
+    id: docs
+    attributes:
+      label: Documentação da API
+      placeholder: https://...
+    validations:
+      required: true
+  - type: dropdown
+    id: auth
+    attributes:
+      label: Autenticação
+      options:
+        - API key
+        - Bearer token
+        - OAuth2
+        - Basic auth
+        - Webhook
+        - Sem autenticação
+        - Outra
+    validations:
+      required: true
+  - type: textarea
+    id: acoes
+    attributes:
+      label: Ações desejadas
+      placeholder: |
+        - Criar registro
+        - Listar registros
+        - Atualizar registro
+    validations:
+      required: true
+  - type: textarea
+    id: exemplo
+    attributes:
+      label: Exemplo de uso
+      placeholder: Ao receber um webhook, criar um contato no CRM...
+    validations:
+      required: true
+  - type: textarea
+    id: limites
+    attributes:
+      label: Limites, paginação e rate limit
+    validations:
+      required: false
+  - type: checkboxes
+    id: confirmacoes
+    attributes:
+      label: Confirmações
+      options:
+        - label: A API é pública ou tenho autorização para propor a integração.
+          required: true
+        - label: Não incluí segredos ou dados de clientes.
+          required: true

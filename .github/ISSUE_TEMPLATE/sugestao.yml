@@ -1,0 +1,52 @@
+name: Sugestão
+description: Proponha uma melhoria, conector ou caso de uso.
+title: "[Sugestão] "
+labels: ["sugestao", "em-avaliacao"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Obrigado por contribuir. Explique o problema antes da solução.
+  - type: textarea
+    id: problema
+    attributes:
+      label: Qual problema isso resolve?
+      placeholder: Hoje eu preciso copiar dados manualmente entre...
+    validations:
+      required: true
+  - type: textarea
+    id: proposta
+    attributes:
+      label: Proposta
+      placeholder: Um conector que lê...
+    validations:
+      required: true
+  - type: textarea
+    id: alternativas
+    attributes:
+      label: Alternativas consideradas
+      placeholder: Já tentei usar HTTP Request, mas...
+    validations:
+      required: false
+  - type: dropdown
+    id: tipo
+    attributes:
+      label: Tipo
+      options:
+        - Conector
+        - Editor/UX
+        - API
+        - Documentação
+        - Exemplo
+        - Outro
+    validations:
+      required: true
+  - type: checkboxes
+    id: confirmacoes
+    attributes:
+      label: Confirmações
+      options:
+        - label: Não incluí segredos, tokens ou dados de clientes.
+          required: true
+        - label: Procurei issues/discussões existentes.
+          required: true
