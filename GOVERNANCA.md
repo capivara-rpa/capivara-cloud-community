@@ -4,7 +4,8 @@
 
 - **Produto** (`capivara-rpa/capivara-cloud`): código, releases e documentação
   oficial.
-- **Comunidade** (este repositório): ideias, RFCs, exemplos e conectores.
+- **Comunidade** (este repositório): snapshot funcional do produto + ideias,
+  RFCs, exemplos e conectores em avaliação.
 - **Mantenedores**: cuidam da triagem, revisão e publicação no produto.
 
 ## Labels
@@ -43,7 +44,8 @@ Uma proposta é aceita quando:
 ## Releases
 
 O produto usa versionamento semântico. A comunidade não publica releases; ela
-propõe mudanças que entram no fluxo do produto.
+propõe mudanças que entram no fluxo do produto. Sempre que a stable do produto
+avança, o snapshot aqui é atualizado preservando `ideias/` e `conectores/`.
 
 ## Segurança
 

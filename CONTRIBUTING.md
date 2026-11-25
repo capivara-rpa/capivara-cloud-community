@@ -1,7 +1,8 @@
 # Como contribuir
 
-Obrigado por ajudar o Capivara Cloud. O objetivo deste repositório é reunir
-ideias, RFCs, exemplos e conectores antes de virarem código no produto.
+Obrigado por ajudar o Capivara Cloud. Este repositório é um **snapshot funcional**
+do produto, usado para rodar, testar e reunir ideias, RFCs, exemplos e conectores
+antes de virarem código na versão estável.
 
 ## Fluxo
 
@@ -22,7 +23,7 @@ ideias, RFCs, exemplos e conectores antes de virarem código no produto.
 
 ## O que não entra aqui
 
-- Código do produto (vai para `capivara-rpa/capivara-cloud`).
+- Forks divergentes do produto (o código aqui é sincronizado; mudanças aceitas vão para `capivara-rpa/capivara-cloud`).
 - Segredos, tokens, senhas ou dados de clientes.
 - Conteúdo ofensivo, spam ou propaganda.
 - Mudanças que quebrem a licença MIT.

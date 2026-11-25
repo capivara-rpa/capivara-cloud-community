@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-tema="claro">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Capivara Cloud · Automação de APIs</title>
+  <meta name="description" content="Capivara Cloud: automação de APIs, fluxos visuais e conectores prontos, 100% em português.">
+  <link rel="icon" type="image/svg+xml" href="/static/img/logo-capivara.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/static/vendor/drawflow.min.css">
+  <link rel="stylesheet" href="/static/styles.css?v=4">
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar">
+      <div class="sidebar-topo">
+        <img src="/static/img/logo-capivara.svg" alt="Capivara" class="logo">
+        <div class="marca">
+          <strong>Capivara</strong>
+          <span>Cloud</span>
+        </div>
+        <span class="versao" id="versao-app">v0.1.0</span>
+      </div>
+
+      <nav class="sidebar-nav">
+        <p class="nav-titulo">Produto</p>
+        <ul>
+          <li><button class="nav-link ativo" data-view="dashboard"><span class="nav-icone">◈</span> Visão geral</button></li>
+          <li><button class="nav-link" data-view="fluxos"><span class="nav-icone">⚡</span> Fluxos</button></li>
+          <li><button class="nav-link" data-view="execucoes"><span class="nav-icone">▤</span> Execuções</button></li>
+          <li><button class="nav-link" data-view="agendamentos"><span class="nav-icone">◷</span> Agendamentos</button></li>
+          <li><button class="nav-link" data-view="conexoes"><span class="nav-icone">◌</span> Conexões</button></li>
+          <li><button class="nav-link" data-view="credenciais"><span class="nav-icone">⌘</span> Credenciais</button></li>
+        </ul>
+        <p class="nav-titulo">Sistema</p>
+        <ul>
+          <li><button class="nav-link" data-view="api"><span class="nav-icone">{ }</span> API / Swagger</button></li>
+        </ul>
+      </nav>
+
+      <div class="sidebar-rodape">
+        <button id="btn-tema" class="tema-toggle" type="button">
+          <span id="tema-icone">☀</span>
+          <span id="tema-texto">Modo escuro</span>
+        </button>
+        <div class="sidebar-usuario">
+          <span class="avatar">C</span>
+          <div>
+            <strong>Capivara</strong>
+            <small>cloud local</small>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <main class="conteudo">
+      <header class="topo">
+        <div>
+          <h1 id="topo-titulo">Visão geral</h1>
+          <p id="topo-subtitulo">Seu centro de automação de APIs, em português.</p>
+        </div>
+        <div class="topo-acoes">
+          <span class="conexao" id="conexao"><span class="pulso"></span><span id="conexao-texto">conectando…</span></span>
+          <a class="botao-secundario" href="/docs" target="_blank" rel="noopener">Abrir Swagger</a>
+        </div>
+      </header>
+
+      <section id="view-dashboard" class="view">
+        <div class="hero">
+          <div class="hero-texto">
+            <span class="eyebrow">CAPIVARA CLOUD · MVP LOCAL</span>
+            <h2>Automação de APIs, do jeito brasileiro.</h2>
+            <p>Monte fluxos visuais, conecte e-mail, Excel, Slack, Teams, Google Sheets e qualquer API REST. Tudo com logs, trace e Swagger público.</p>
+            <div class="hero-acoes">
+              <button id="btn-hero-novo" class="botao-primario" type="button">Criar fluxo</button>
+              <button id="btn-hero-exemplo" class="botao-secundario" type="button">Abrir exemplo</button>
+            </div>
+          </div>
+          <div class="hero-mascote">
+            <img src="/static/img/capivara.svg" alt="Mascote Capivara">
+          </div>
+        </div>
+
+        <div class="resumo" id="resumo"></div>
+
+        <div class="grid-duas">
+          <div class="card">
+            <div class="card-cabecalho">
+              <h3>Últimas execuções</h3>
+              <button class="link" data-ir="execucoes" type="button">Ver todas</button>
+            </div>
+            <div id="dashboard-execucoes"></div>
+          </div>
+          <div class="card">
+            <div class="card-cabecalho">
+              <h3>Conectores prontos</h3>
+              <button class="link" data-ir="conexoes" type="button">Ver catálogo</button>
+            </div>
+            <div id="dashboard-conectores" class="conectores-mini"></div>
+          </div>
+        </div>
+      </section>
+
+      <section id="view-fluxos" class="view oculto">
+        <div class="barra-fluxos">
+          <div class="campo-inline">
+            <label for="seletor-workflow">Fluxo</label>
+            <select id="seletor-workflow"></select>
+          </div>
+          <div class="barra-acoes">
+            <button id="btn-novo-fluxo" class="botao-secundario" type="button">+ Novo</button>
+            <button id="btn-salvar" class="botao-secundario" type="button">Salvar</button>
+            <button id="btn-executar" class="botao-primario" type="button">▶ Rodar</button>
+            <button id="btn-excluir" class="botao-perigo" type="button">Excluir</button>
+          </div>
+        </div>
+
+        <div class="builder">
+          <aside class="paleta">
+            <div class="paleta-topo">
+              <h3>Blocos</h3>
+              <input id="busca-paleta" type="search" placeholder="Buscar conector...">
+            </div>
+            <div id="paleta-conjuntos" class="paleta-conjuntos"></div>
+            <div id="paleta-lista" class="paleta-lista"></div>
+          </aside>
+
+          <div class="canvas-area">
+            <div class="canvas-topo">
+              <span id="workflow-status" class="chip">rascunho</span>
+              <div class="zoom">
+                <button id="btn-zoom-out" type="button" title="Diminuir zoom">−</button>
+                <span id="zoom-label">100%</span>
+                <button id="btn-zoom-in" type="button" title="Aumentar zoom">+</button>
+                <button id="btn-zoom-reset" type="button" title="Zoom 100%">1:1</button>
+              </div>
+            </div>
+            <div id="drawflow" class="drawflow-area" ondrop="soltarNo(event)" ondragover="permitirSoltar(event)"></div>
+            <div class="run-panel oculto" id="run-panel">
+              <div class="run-topo">
+                <div>
+                  <h3>Trace da execução</h3>
+                  <p id="run-resumo"></p>
+                </div>
+                <button id="btn-fechar-run" type="button" aria-label="Fechar trace">×</button>
+              </div>
+              <div id="run-passos"></div>
+            </div>
+          </div>
+
+          <aside class="inspetor">
+            <div class="inspetor-vazio" id="inspetor-vazio">
+              <span>◇</span>
+              <h3>Selecione um nó</h3>
+              <p>Clique em um bloco para configurar os campos, a credencial e o comportamento.</p>
+            </div>
+            <div id="inspetor-conteudo" class="oculto"></div>
+          </aside>
+        </div>
+      </section>
+
+      <section id="view-execucoes" class="view oculto">
+        <div class="card">
+          <div class="card-cabecalho">
+            <div>
+              <h3>Execuções</h3>
+              <p class="subtitulo">Cada passo fica registrado com entrada, saída e duração.</p>
+            </div>
+            <button id="btn-atualizar-execucoes" class="botao-secundario" type="button">Atualizar</button>
+          </div>
+          <div class="tabela-envolucro">
+            <table class="tabela">
+              <thead>
+                <tr>
+                  <th>Status</th>
+                  <th>Fluxo</th>
+                  <th>Gatilho</th>
+                  <th>Início</th>
+                  <th>Duração</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody id="corpo-execucoes"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <section id="view-agendamentos" class="view oculto">
+        <div class="barra-acoes">
+          <button type="button" class="botao-primario" id="btn-novo-agendamento">+ Novo agendamento</button>
+          <div class="segmentado" role="group" aria-label="Visualização dos agendamentos">
+            <button type="button" class="botao-secundario ativo" id="btn-agenda-lista">Lista</button>
+            <button type="button" class="botao-secundario" id="btn-agenda-calendario">Calendário</button>
+          </div>
+          <button type="button" class="botao-secundario" id="btn-verificar-agendamentos">Verificar agora</button>
+          <button type="button" class="botao-secundario" id="btn-atualizar-agendamentos">Atualizar</button>
+          <span class="dica">Disparos automáticos por intervalo, horário ou cron.</span>
+        </div>
+
+        <form id="form-agendamento" class="form-agendamento oculto">
+          <div class="campo">
+            <label for="agenda-workflow">Fluxo</label>
+            <select id="agenda-workflow" required></select>
+          </div>
+          <div class="campo">
+            <label for="agenda-nome">Nome</label>
+            <input id="agenda-nome" required placeholder="Relatório diário" autocomplete="off">
+          </div>
+          <div class="campo">
+            <label for="agenda-tipo">Recorrência</label>
+            <select id="agenda-tipo">
+              <option value="intervalo">A cada…</option>
+              <option value="diario">Diariamente às…</option>
+              <option value="cron">Cron (avançado)…</option>
+            </select>
+          </div>
+          <div class="campo" id="campo-intervalo">
+            <label for="agenda-intervalo">Intervalo (minutos)</label>
+            <input type="number" id="agenda-intervalo" min="1" value="15">
+          </div>
+          <div class="campo oculto" id="campo-hora">
+            <label for="agenda-hora">Horário</label>
+            <input type="time" id="agenda-hora" value="09:00">
+          </div>
+          <div class="campo oculto" id="campo-cron">
+            <label for="agenda-cron">Expressão cron</label>
+            <input type="text" id="agenda-cron" value="0 9 * * seg-sex" placeholder="*/15 9-18 * * seg-sex">
+          </div>
+          <div class="campo campo-largo oculto" id="campo-dias">
+            <label>Dias da semana (cron)</label>
+            <div class="dias-semana" id="agenda-dias">
+              <label class="dia"><input type="checkbox" value="1" checked> Seg</label>
+              <label class="dia"><input type="checkbox" value="2" checked> Ter</label>
+              <label class="dia"><input type="checkbox" value="3" checked> Qua</label>
+              <label class="dia"><input type="checkbox" value="4" checked> Qui</label>
+              <label class="dia"><input type="checkbox" value="5" checked> Sex</label>
+              <label class="dia"><input type="checkbox" value="6"> Sáb</label>
+              <label class="dia"><input type="checkbox" value="7"> Dom</label>
+            </div>
+            <p class="ajuda">Os dias ajustam o último campo da expressão cron.</p>
+          </div>
+          <details class="campo campo-largo">
+            <summary>Dados de entrada (JSON)</summary>
+            <textarea id="agenda-entrada" rows="4" spellcheck="false">{}</textarea>
+          </details>
+          <div class="campo campo-check">
+            <input type="checkbox" id="agenda-ativo" checked>
+            <label for="agenda-ativo">Ativo</label>
+          </div>
+          <div class="campo campo-botao">
+            <button type="submit" class="botao-primario">Agendar</button>
+            <button type="button" class="botao-secundario" id="agenda-cancelar">Cancelar</button>
+          </div>
+        </form>
+
+        <div class="tabela-envolucro" id="tabela-agendamentos">
+          <table class="tabela">
+            <thead>
+              <tr><th>#</th><th>Fluxo</th><th>Quando</th><th>Próxima</th><th>Execuções</th><th>Status</th><th>Ações</th></tr>
+            </thead>
+            <tbody id="corpo-agendamentos"></tbody>
+          </table>
+        </div>
+
+        <div class="calendario oculto" id="calendario-agendamentos">
+          <div class="calendario-topo">
+            <button type="button" class="botao-secundario" id="cal-agenda-prev" title="Mês anterior">‹</button>
+            <h3 id="cal-agenda-titulo">—</h3>
+            <button type="button" class="botao-secundario" id="cal-agenda-hoje">Hoje</button>
+            <button type="button" class="botao-secundario" id="cal-agenda-next" title="Próximo mês">›</button>
+          </div>
+          <div class="calendario-legenda" id="cal-agenda-legenda"></div>
+          <div class="calendario-grade" id="cal-agenda-grade"></div>
+        </div>
+      </section>
+
+      <section id="view-conexoes" class="view oculto">
+        <div class="introducao">
+          <div>
+            <span class="eyebrow">CATÁLOGO</span>
+            <h2>Conectores prontos para o mundo real.</h2>
+            <p>Cada conector tem campos guiados, credencial cifrada e documentação pública. Precisa de outro serviço? Use HTTP Request.</p>
+          </div>
+          <div class="contador-conectores" id="contador-conectores"></div>
+        </div>
+        <div id="catalogo-conectores" class="catalogo"></div>
+      </section>
+
+      <section id="view-credenciais" class="view oculto">
+        <div class="grid-credenciais">
+          <div class="card">
+            <div class="card-cabecalho">
+              <div>
+                <h3>Nova credencial</h3>
+                <p class="subtitulo">Os valores são cifrados com Fernet antes de ir para o SQLite.</p>
+              </div>
+            </div>
+            <form id="form-credencial" class="formulario">
+              <label>Nome
+                <input id="cred-nome" required placeholder="smtp_principal" autocomplete="off">
+              </label>
+              <label>Tipo
+                <select id="cred-tipo"></select>
+              </label>
+              <label>Dados (JSON)
+                <textarea id="cred-dados" rows="11" required spellcheck="false"></textarea>
+              </label>
+              <p class="ajuda" id="cred-ajuda"></p>
+              <button class="botao-primario" type="submit">Salvar credencial</button>
+            </form>
+          </div>
+          <div class="card">
+            <div class="card-cabecalho">
+              <div>
+                <h3>Credenciais</h3>
+                <p class="subtitulo">A API só devolve os valores mascarados.</p>
+              </div>
+            </div>
+            <div id="lista-credenciais"></div>
+          </div>
+        </div>
+      </section>
+
+      <section id="view-api" class="view oculto">
+        <div class="api-hero">
+          <span class="eyebrow">API-FIRST</span>
+          <h2>Swagger de verdade, pronto para integrar.</h2>
+          <p>Todo fluxo pode ser disparado por HTTP. Use o Swagger para testar, o OpenAPI para gerar clientes e o webhook para conectar qualquer sistema.</p>
+          <div class="hero-acoes">
+            <a class="botao-primario" href="/docs" target="_blank" rel="noopener">Abrir Swagger</a>
+            <a class="botao-secundario" href="/openapi.json" target="_blank" rel="noopener">OpenAPI JSON</a>
+          </div>
+        </div>
+        <div class="grid-duas">
+          <div class="card">
+            <div class="card-cabecalho"><h3>Endpoints principais</h3></div>
+            <div id="lista-endpoints" class="endpoints"></div>
+          </div>
+          <div class="card">
+            <div class="card-cabecalho"><h3>Exemplo de webhook</h3></div>
+            <pre class="codigo" id="codigo-webhook"></pre>
+          </div>
+        </div>
+      </section>
+
+      <footer class="rodape">
+        Capivara Cloud · MVP local · <span id="rodape-versao">v0.1.0</span> · feito para a comunidade brasileira
+      </footer>
+    </main>
+  </div>
+
+  <dialog id="dialog-execucao" class="modal">
+    <div class="modal-topo">
+      <div>
+        <h2 id="dialog-execucao-titulo">Detalhe da execução</h2>
+        <p id="dialog-execucao-subtitulo"></p>
+      </div>
+      <button id="btn-fechar-dialog" type="button" aria-label="Fechar">×</button>
+    </div>
+    <div id="dialog-execucao-corpo"></div>
+  </dialog>
+
+  <div id="toast" class="toast oculto" role="status"></div>
+
+  <script src="/static/vendor/drawflow.min.js"></script>
+  <script src="/static/app.js?v=4"></script>
+</body>
+</html>
